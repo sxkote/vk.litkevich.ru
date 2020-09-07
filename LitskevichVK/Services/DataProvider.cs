@@ -39,8 +39,12 @@ namespace LitskevichVK.Services
                 .Where(f => f.Extension.Equals(".jpg", StringComparison.InvariantCultureIgnoreCase) || f.Extension.Equals(".png", StringComparison.InvariantCultureIgnoreCase))
                 .Select(f =>
                 {
-                    using (var imager = ImagerService.Create(f.FullName))
-                        return new ImageModel(folder.Replace("~", ""), f.Name, imager.GetTitle(), imager.GetComment());
+                    return new ImageModel(folder.Replace("~", ""), f.Name, f.Name);
+
+                    // sorry, but ImagerService not working in docker container... 
+                    // will try to fix it
+                    //using (var imager = ImagerService.Create(f.FullName))
+                    //    return new ImageModel(folder.Replace("~", ""), f.Name, imager.GetTitle(), imager.GetComment());
                 })
                 .ToList();
         }
@@ -75,11 +79,11 @@ namespace LitskevichVK.Services
         {
             var gallery = GetGallery(name);
             if (gallery == null)
-                throw new KeyNotFoundException("Gallery not found!");
+                throw new KeyNotFoundException($"Gallery '{name}' not found!");
 
             var directory = $"{_root}{gallery.Folder}";
             if (!Directory.Exists(directory))
-                throw new DirectoryNotFoundException("Gallery Folder not found!");
+                throw new DirectoryNotFoundException($"Gallery '{name}' Folder '{directory}' not found!");
 
             return new DirectoryInfo(directory).GetFiles()
                  .Where(f => f.Extension.Equals(".jpg", StringComparison.InvariantCultureIgnoreCase) || f.Extension.Equals(".png", StringComparison.InvariantCultureIgnoreCase))
@@ -89,6 +93,7 @@ namespace LitskevichVK.Services
                      //using (var imager = ImagerService.Create(f.FullName))
                      //    return new ImageModel(directory, f.Name, imager.GetTitle(), imager.GetComment());
                  })
+                 .OrderBy(i => i.Filename)
                  .ToList();
         }
 
@@ -96,11 +101,11 @@ namespace LitskevichVK.Services
         {
             var gallery = GetGallery(name);
             if (gallery == null)
-                throw new KeyNotFoundException("Gallery not found!");
+                throw new KeyNotFoundException($"Gallery '{name}' not found!");
 
             var path = $"{_root}{gallery.Folder}/{gallery.Icon}";
             if (!File.Exists(path))
-                throw new DirectoryNotFoundException("Gallery Icon file not found!");
+                throw new DirectoryNotFoundException($"Gallery '{name}' Icon file '{path}' not found!");
 
             return new ImageModel($"/root/{gallery.Folder}", gallery.Icon);
         }
