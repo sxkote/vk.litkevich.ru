@@ -1,0 +1,35 @@
+﻿@model List<LitskevichVK.Models.GalleryModel>
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-page="/Index">Лицкевич В.К.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-page="/Index">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-page="/About">Биография</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-page="/Gallery" asp-route-name="@Model[0].Name">Каталог Картин</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarGalleryLinks" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Сборники
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarGalleryLinks">
+                        @for (var i = 1; i < Model.Count; i++)
+                        {
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Gallery" asp-route-name="@Model[i].Name">@Model[i].Title</a>
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

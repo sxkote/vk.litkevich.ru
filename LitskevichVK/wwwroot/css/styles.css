@@ -1,0 +1,56 @@
+﻿img.photo {
+  max-height: 400px; }
+
+.page-title {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 40px; }
+  .page-title:after {
+    content: "";
+    /* This is necessary for the pseudo element to work. */
+    display: block;
+    /* This will put the pseudo element on its own line. */
+    margin: 0 auto;
+    /* This will center the border. */
+    width: 100%;
+    /* Change this to whatever width you want. */
+    padding-top: 5px;
+    /* This creates some space between the element and the border. */
+    border-bottom: 1px solid rgba(136, 136, 136, 0.5);
+    /* This creates the border. Replace black with whatever color you want. */ }
+
+#biography {
+  font-size: 1.2em; }
+  #biography #photos {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    min-width: 150px;
+    height: 500px;
+    width: auto; }
+  #biography p {
+    margin: 10px 0;
+    text-align: justify;
+    text-indent: 50px; }
+
+.navbar .dropdown-menu.show {
+  min-width: 250px; }
+
+.gallery-icon-link {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px; }
+  .gallery-icon-link a {
+    text-decoration: none; }
+    .gallery-icon-link a:hover {
+      text-decoration: none; }
+    .gallery-icon-link a img {
+      height: 250px;
+      width: auto; }
+      .gallery-icon-link a img:hover {
+        border-color: #8888FF; }
+    .gallery-icon-link a span {
+      display: block;
+      font-size: 1.2em; }

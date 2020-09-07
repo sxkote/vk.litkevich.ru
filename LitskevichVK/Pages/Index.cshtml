@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+
+<section class="row">
+    <div class="col-md-4 text-center">
+        <img class="img-responsive img-rounded img-thumbnail photo"
+             src="~/data/foto.jpg"
+             alt="Лицкевич Владимир Константинович"
+             title="Лицкевич Владимир Константинович" />
+    </div>
+    <div class="col-md-8">
+        <h1 class="text-center mt-4"><strong>Лицкевич Владимир Константинович</strong></h1>
+        <p class="text-right blockquote my-3"><em>"Все остается людям..."</em></p>
+        <p class="lead">
+            <strong>17 ноября 1926 г. - 29 мая 2011 г.</strong>
+            <br />
+            Доктор Архитектурных наук, художник, разносторонний, интеллигентный, эрудированный, чуткий и скромный человек, подаривший этому миру все свое время...
+        </p>
+        <p>
+            <a class="btn btn-primary" asp-page="/About">Биография &raquo;</a>
+        </p>
+    </div>
+</section>
+
+<section class="mt-5">
+    <h2 class="page-title">Сборники Картин</h2>
+
+    <div class="row">
+        @foreach (var gallery in Model.GalleryCollection)
+        {
+            <div class="col-md-4 gallery-icon-link text-center">
+                <a class="" asp-page="/Gallery" asp-route-name="@gallery.Name">
+                    <img class="img-rounded img-thumbnail" src="@Model.GalleryIcons[gallery.Name].Url" />
+                    <span>@gallery.Title</span>
+                </a>
+            </div>
+        }
+    </div>
+</section>

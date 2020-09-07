@@ -1,0 +1,43 @@
+﻿@page "{name}"
+@model LitskevichVK.Pages.GalleryPageModel
+
+
+<h2 class="page-title">@Model.Gallery.Title</h2>
+
+<div id="gallery">
+    
+    @foreach (var pic in Model.Images)
+    {
+        <img alt="@pic.Filename"
+             title="@pic.Filename"
+             src="@pic.Url"
+             data-image="@pic.Url"
+             data-description="@(pic.Comment+ " ")"
+             style="display:none" />
+    }
+</div>
+
+@section Scripts{
+    <script src="~/lib/unitegallery/js/unitegallery.min.js"></script>
+    @*<script src="~/lib/unitegallery/themes/default/ug-theme-default.js"></script>*@
+    <script src="~/lib/unitegallery/themes/tiles/ug-theme-tiles.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery("#gallery").unitegallery({
+                gallery_theme: "tiles",
+                theme_gallery_padding: 15,
+                tile_enable_shadow: false,
+                tile_enable_border: true,
+                tiles_space_between_cols: 15,
+                tiles_justified_space_between: 15,
+                tiles_col_width: 235,
+                tile_border_color: "#ffffff",
+                tile_enable_outline: true,
+                tile_enable_icons: false,
+                tiles_type: "justified",
+                lightbox_type: "wide",
+                grid_num_rows: 100
+            });
+        });
+    </script>
+}
